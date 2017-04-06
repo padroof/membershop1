@@ -1,0 +1,152 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'com.neenbedankt.android-apt'
+
+repositories {
+    mavenCentral()
+}
+def RELEASE_STORE_PASSWORD = "hamed123"
+def RELEASE_KEY_ALIAS = "telegram"
+def RELEASE_KEY_PASSWORD = "hamed123"
+//def dbflow_version = "3.0.0"
+dependencies {
+    compile 'com.android.support:multidex:1.0.1'
+    compile project(':pushe-lib-0.10.2')
+    //    compile 'com.onesignal:OneSignal:3.0.3@aar'
+    //    compile "com.google.android.gms:play-services-location:8.4.0"
+    compile 'com.android.support:support-v4:23.+'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+
+    compile 'com.android.support:design:22.2.0'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/java-jwt-2.1.0.jar')
+    compile 'com.android.support:cardview-v7:23.4.0'
+    //    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    //    // use kapt for kotlin apt
+    //    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    //    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    compile files('libs/gson-2.2.2.jar')
+    compile files('libs/adad-client-3.1.jar')
+    compile files('libs/adPlayAndroidv2.5.jar')
+    compile project(':circleimageview-2.1.0')
+    compile project(':HockeySDK-3.6.2')
+    compile project(':isoparser-1.0.6')
+
+    compile 'com.android.support:support-annotations:22.1.0'
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
+
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig.applicationId = "ir.irani.membershop"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("config/release.keystore.jks")
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+
+        release {
+            storeFile file("config/release.keystore.jks")
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            jniDebuggable true
+            signingConfig signingConfigs.debug
+//            applicationIdSuffix ".beta"
+        }
+
+        release {
+            debuggable false
+            jniDebuggable false
+          //  signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        foss {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.release
+        }
+    }
+
+//    defaultConfig.versionCode = 787
+
+
+    sourceSets.main {
+        jniLibs.srcDir 'libs'
+        jni.srcDirs = [] //disable automatic ndk-build call
+        //jni.srcDirs = 'jni'
+    }
+
+    sourceSets.debug {
+        manifest.srcFile 'config/debug/AndroidManifest.xml'
+    }
+
+    sourceSets.release {
+        manifest.srcFile 'config/release/AndroidManifest.xml'
+    }
+
+    sourceSets.foss {
+        manifest.srcFile 'config/foss/AndroidManifest.xml'
+    }
+
+//    productFlavors {
+//        x86 {
+//            ndk {
+//                abiFilter "x86"
+//            }
+//            versionCode = 2
+//        }
+//        arm {
+//            ndk {
+//                abiFilter "armeabi"
+//            }
+//            versionCode = 0
+//        }
+//        armv7 {
+//            ndk {
+//                abiFilter "armeabi-v7a"
+//            }
+//            versionCode = 1
+//        }
+//        fat {
+//            versionCode = 3
+//        }
+//    }
+
+    applicationVariants.all { variant ->
+        def abiVersion = 0
+        //variant.productFlavors.get(0).versionCode
+        variant.mergedFlavor.versionCode = defaultConfig.versionCode * 10 + abiVersion;
+    }
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 24
+       versionCode 2
+       versionName "2.0"
+        multiDexEnabled true
+        /*manifestPlaceholders = [manifestApplicationId: "${applicationId}",
+                                onesignal_app_id: "cd91dc9c-70f9-49af-a191-5e8144f1f7c0",
+                                onesignal_google_project_number: "188572306364"]*/
+    }
+    defaultConfig.versionCode = 18066
+}
+
+apply plugin: 'com.google.gms.google-services'

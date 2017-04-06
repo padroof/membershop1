@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="لطفا ابتدا نسبت به ثبت کانال اقدام نموده تا در زمان محدودیت تلگرام مشکلی در ثبت کانال و سفارش عضو نداشته باشید"
+            android:textColor="@android:color/black"
+            android:layout_margin="20dp"
+            android:textSize="16dp" />
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="ثبت کانال"
+            android:id="@+id/add"
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_pink_dark" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="جهت مشاهده لیست کانال ها, خرید سکه و یا سفارش عضو وارد صفحه اصلی شوید"
+            android:textColor="@android:color/black"
+            android:layout_margin="20dp"
+            android:textSize="16dp" />
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="ورود به صفحه اصلی"
+            android:id="@+id/cancel"
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_pink_dark" />
+
+    </LinearLayout>
+
+</LinearLayout>

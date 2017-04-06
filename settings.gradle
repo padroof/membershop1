@@ -1,0 +1,1 @@
+include ':TMessagesProj', ':pushe-lib-0.10.2', ':HockeySDK-3.6.2', ':isoparser-1.0.6', ':circleimageview-2.1.0'
